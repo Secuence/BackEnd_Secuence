@@ -55,7 +55,7 @@ builder.Services.AddAuthentication(opt =>
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "GenesisAPI", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Secuence", Version = "v1" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",

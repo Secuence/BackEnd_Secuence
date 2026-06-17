@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SecuenceBack")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d0bb4da5cd8863eba7f8e78099215d4492bbd0ec")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+97071c699f784d4cd2a3d5fc2dfa8fe9b3939f6f")]
 [assembly: System.Reflection.AssemblyProductAttribute("SecuenceBack")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SecuenceBack")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
