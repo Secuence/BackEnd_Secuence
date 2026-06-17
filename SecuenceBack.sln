@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36908.2 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecuenceBack", "SecuenceBack\SecuenceBack.csproj", "{BB8EFAE1-D2ED-4362-BEEE-D1785BE667FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecuenceBack", "SecuenceBack\SecuenceBack.csproj", "{F64434F3-74A6-4C37-9578-35C69615BC2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BB8EFAE1-D2ED-4362-BEEE-D1785BE667FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB8EFAE1-D2ED-4362-BEEE-D1785BE667FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB8EFAE1-D2ED-4362-BEEE-D1785BE667FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB8EFAE1-D2ED-4362-BEEE-D1785BE667FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F64434F3-74A6-4C37-9578-35C69615BC2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F64434F3-74A6-4C37-9578-35C69615BC2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F64434F3-74A6-4C37-9578-35C69615BC2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F64434F3-74A6-4C37-9578-35C69615BC2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {57565896-A3B4-4E9C-8ABA-F7BCE83F35EA}
+		SolutionGuid = {F052B5D1-E015-4FBF-9F5F-93DB4B995EC9}
 	EndGlobalSection
 EndGlobal

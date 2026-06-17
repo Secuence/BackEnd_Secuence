@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "SecuenceBack.Controllers.UserController",
+    "Method": "Login",
+    "RelativePath": "api/User/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "SecuenceBack.Models.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SecuenceBack.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",
