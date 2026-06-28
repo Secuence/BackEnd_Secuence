@@ -113,9 +113,14 @@ namespace SecuenceBack.Controllers
 
                 if (await _context.UserTbl.Where(u => u.Email == userC.Email && u.DeletedAt == null).FirstOrDefaultAsync() == null)
                 {
+
+
                     TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
                     UserTbl user = new UserTbl();
                     // Existe en el AD, No existe usuario registrado y ademas el rol existe en la db
+
+
+
                     user.Email = userC.Email.ToLower();
                     user.FullName = textInfo.ToTitleCase(userC.FullName.TrimEnd().TrimStart().ToLower());
                     user.Password = _encryptor.Encrypt(userC.Password);
@@ -280,12 +285,12 @@ namespace SecuenceBack.Controllers
                     respuesta.Ok = 1;
                     //respuesta.Message = "Success";
                     respuesta.Message = "Usuario Eliminado";
-                }
+                    }
                 else
                 {
                     respuesta.Ok = 0;
                     respuesta.Message = "Usuario no encontrado";
-                }
+                    }
             }
             catch (Exception e)
             {
