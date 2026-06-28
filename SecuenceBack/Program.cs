@@ -20,7 +20,7 @@ if (builder.Environment.IsDevelopment())
     );
 else
     builder.Services.AddDbContext<AppDBContext>(
-        opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection"))
+       opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection"))
     );
 
 
