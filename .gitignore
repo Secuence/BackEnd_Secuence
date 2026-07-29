@@ -2,6 +2,8 @@
 # Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
 ################################################################################
 
+/SecuenceBack/obj
+/SecuenceBack/bin/Debug/net8.0
 /.vs/ProjectEvaluation
 /.vs
 /SecuenceBack/obj/Debug/net8.0/SecuenceBack.AssemblyInfoInputs.cache

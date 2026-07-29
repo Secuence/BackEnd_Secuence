@@ -39,6 +39,23 @@ namespace SecuenceBack.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            // CORREGIDO: modelBuilder.Model es la propiedad correcta
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                var properties = entityType.GetProperties()
+                    .Where(p => p.ClrType == typeof(DateTime) || p.ClrType == typeof(DateTime?));
+
+                foreach (var property in properties)
+                {
+                    property.SetValueConverter(new Microsoft.EntityFrameworkCore.Storage.ValueConversion.ValueConverter<DateTime, DateTime>(
+                        v => v.Kind == DateTimeKind.Utc ? v : DateTime.SpecifyKind(v, DateTimeKind.Utc),
+                        v => DateTime.SpecifyKind(v, DateTimeKind.Utc)
+                    ));
+                }
+            }
+
             if (_appSettings["ConnectionStrings:isDev"] == "true")
             {
                 //modelBuilder.Entity<AnswersByQuestionsByApplications>().ToTable("AnswersByQuestionsByApplicationsDev");
@@ -50,7 +67,7 @@ namespace SecuenceBack.Data
                 //modelBuilder.Entity<Questions>().ToTable("QuestionsDev");
                 //modelBuilder.Entity<Logs>().ToTable("LogsDev");
                 //modelBuilder.Entity<QuestionsByApplications>().ToTable("QuestionsByApplicationsDev");
-                modelBuilder.Entity<RolTbl>().ToTable("Roles");
+                modelBuilder.Entity<RolTbl>().ToTable("RolTbl");
                 //modelBuilder.Entity<Tags>().ToTable("TagsDev");
                 modelBuilder.Entity<UserTbl>().ToTable("UserTbl");
                 modelBuilder.Entity<UserMedicHCRel>().ToTable("UserMedicHCRel");
@@ -68,7 +85,7 @@ namespace SecuenceBack.Data
                 //modelBuilder.Entity<Questions>().ToTable("Questions");
                 //modelBuilder.Entity<Logs>().ToTable("Logs");
                 //modelBuilder.Entity<QuestionsByApplications>().ToTable("QuestionsByApplications");
-                modelBuilder.Entity<RolTbl>().ToTable("Roles");
+                modelBuilder.Entity<RolTbl>().ToTable("RolTbl");
                 //modelBuilder.Entity<Tags>().ToTable("Tags");
                 modelBuilder.Entity<UserMedicHCRel>().ToTable("UserMedicHCRel");
                 modelBuilder.Entity<UserTbl>().ToTable("UserTbl");

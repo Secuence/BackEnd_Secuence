@@ -44,6 +44,7 @@ namespace SecuenceBack.Controllers
                     if (_encryptor.Compare(model.Password, user.Password))
                     {
                         var UserMedic = await _context.UserMedicHCRel.Where(u => u.UserID == user.UserID).FirstOrDefaultAsync();
+
                         var rol = await _repository.SelectById<RolTbl>(UserMedic.RollID);
                         List<PermissionsTbl> permissions = new List<PermissionsTbl>();
                         if (rol != null)
@@ -54,6 +55,7 @@ namespace SecuenceBack.Controllers
                                 permissions.Add(await _context.PermissionsTbl.Where(p => p.PermissionsID == rolper.PermissionsID).FirstOrDefaultAsync());
                             }
                         }
+
                         var token = createToken(user, rol, permissions);
                         respuesta.Ok = 1;
                         respuesta.Data.Add(new
@@ -89,7 +91,7 @@ namespace SecuenceBack.Controllers
 
 
         [HttpPost("CreateUser")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> CreateUser(UserCreate userC)
         {
             Respuesta<object> respuesta = new();
@@ -126,8 +128,8 @@ namespace SecuenceBack.Controllers
                     user.Photo = userC.Photo;
                     user.PolicesAccepted = userC.PolicesAccepted;
                     user.UserType = userC.UserType;
-                    user.CreatedAt = DateTime.Now;
-                    user.PolicesAcceptedAt = DateTime.Now;
+                    user.CreatedAt = DateTime.UtcNow;
+                    user.PolicesAcceptedAt = DateTime.UtcNow;
                     user.Status = 1;
                     await _repository.CreateAsync<UserTbl>(user);
                     respuesta.Ok = 1;
@@ -151,8 +153,8 @@ namespace SecuenceBack.Controllers
         }
 
         [HttpGet("GetAllUsers")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> GetAll(int HealthCenterFilter, int pagNumber = 1, int pagSize = 10, string emailFilter = null, string? statusFilter = "Ambos", int HcIdfillter = 0)
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> GetAll(int HealthCenterFilter, int pagNumber = 1, int pagSize = 10, string emailFilter = null, string? statusFilter = "Ambos")
         {
             Respuesta<object> respuesta = new();
             try
@@ -252,7 +254,7 @@ namespace SecuenceBack.Controllers
                 userdb.Status = user.Status;
                 userdb.Country = user.Country;
                 userdb.Password = _encryptor.Encrypt(user.Password);
-                userdb.UpdatedAt = DateTime.Now;
+                userdb.UpdatedAt = DateTime.UtcNow;
                 await _repository.UpdateAsync(userdb);
                 respuesta.Ok = 1;
                 respuesta.Message = "Usuario Modificado";
@@ -413,6 +415,7 @@ namespace SecuenceBack.Controllers
                                 (us, um) => new UserDto
                                 {
                                     UserID = us.UserID,
+                                    FullName = us.FullName,
                                     Email = us.Email,
                                     Country = us.Country,
                                     UserType = us.UserType,
@@ -429,6 +432,7 @@ namespace SecuenceBack.Controllers
                         (us, um) => new UserDto
                         {
                             UserID = us.UserID,
+                            FullName = us.FullName,
                             Email = us.Email,
                             Country = us.Country,
                             UserType = us.UserType,

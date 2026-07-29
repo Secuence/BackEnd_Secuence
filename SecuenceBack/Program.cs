@@ -16,11 +16,11 @@ builder.Services.AddHttpClient();
 
 if (builder.Environment.IsDevelopment())
     builder.Services.AddDbContext<AppDBContext>(
-        opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnectionDev"))
+        opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection"))
     );
 else
     builder.Services.AddDbContext<AppDBContext>(
-        opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection"))
+        opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection"))
     );
 
 
