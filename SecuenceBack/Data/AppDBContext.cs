@@ -19,6 +19,7 @@ namespace SecuenceBack.Data
         public virtual DbSet<UserMedicHCRel> UserMedicHCRel { get; set; }
         public virtual DbSet<UserTbl> UserTbl { get; set; }
         public virtual DbSet<MedicTbl> MedicTbl { get; set; }
+        public virtual DbSet<HealthCenterTbl> HealthCenterTbl { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -55,6 +56,7 @@ namespace SecuenceBack.Data
                 modelBuilder.Entity<UserTbl>().ToTable("UserTbl");
                 modelBuilder.Entity<UserMedicHCRel>().ToTable("UserMedicHCRel");
                 modelBuilder.Entity<MedicTbl>().ToTable("MedicTbl");
+                modelBuilder.Entity<HealthCenterTbl>().ToTable("HealthCenterTbl");
             }
             else
             {
@@ -64,6 +66,7 @@ namespace SecuenceBack.Data
                 modelBuilder.Entity<UserMedicHCRel>().ToTable("UserMedicHCRel");
                 modelBuilder.Entity<UserTbl>().ToTable("UserTbl");
                 modelBuilder.Entity<MedicTbl>().ToTable("MedicTbl");
+                modelBuilder.Entity<HealthCenterTbl>().ToTable("HealthCenterTbl");
             }
         }
     }
