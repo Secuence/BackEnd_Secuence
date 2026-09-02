@@ -41,19 +41,6 @@ namespace SecuenceBack.Controllers
             var userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
             try
             {
-                string validate = validateText(MedicC.);
-                if (validate != "validado")
-                {
-                    //El Nombre o apellido no tiene el formato
-                    respuesta.Ok = 0;
-                    respuesta.Message = validate;
-                    return BadRequest(respuesta);
-                }
-
-                //algo como buscar el Email en la base AD para luego ver si ese usuario exite y no esta duplicado en la base de datos
-
-
-
                 if (await _context.UserTbl.Where(u => u.DeletedAt == null && u.UserID == UserID).FirstOrDefaultAsync() == null)
                 {
                    
@@ -132,47 +119,28 @@ namespace SecuenceBack.Controllers
                     return NotFound(respuesta);
                 }
                 
-                var dbemailvalidate = await _context.MedicTbl.Where(dbu => dbu.MedicID == id && dbu.Status != 0).FirstOrDefaultAsync();
-                if (dbemailvalidate == null)
-                {
-                    respuesta.Ok = 0;
-                    respuesta.Message = "El Medico no existe";
-                    return BadRequest(respuesta);
-                }
-                var userdb = await _repository.SelectById<MedicTbl>(id);
-                if (userdb == null || userdb.DeleteedAt != null)
+                var medicdb = await _repository.SelectById<MedicTbl>(id);
+                if (medicdb == null || medicdb.DeleteedAt != null)
                 {
                     //el ususario no existe o esta eliminado
                     respuesta.Ok = 0;
-                    respuesta.Message = "Usuario no encontrado";
+                    respuesta.Message = "medico no encontrado";
                     return NotFound(respuesta);
                 };
-
-                if (await _context.UserTbl.Where(u => u.DeletedAt == null && u.UserID == UserID).FirstOrDefaultAsync() == null)
-                {
-
-                    TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
-                    MedicTbl medic = new MedicTbl();
-                    // Existe en el AD, No existe usuario registrado y ademas el rol existe en la db
-
-                    medic.License = MedicC.License;
-                    medic.Specialization = MedicC.Specialization;
-                    medic.Country = MedicC.Country;
-                    medic.Degree = MedicC.Degree;
-                    medic.PatientsAvg = MedicC.PatientsAvg;
-                    medic.PhoneNumber = MedicC.PhoneNumber;
-                    medic.WebSite = MedicC.WebSite;
-                    medic.MedicTypeType = MedicC.MedicTypeType;
-                    medic.Response = MedicC.Response;
-                    medic.PoliciesAccepted = MedicC.PoliciesAccepted;
-
-                    medic.CreatedAt = DateTime.UtcNow;
-                    medic.PoliciesAcceptedAt = DateTime.UtcNow;
-                    medic.Status = 1;
-                    var medicID = await _repository.CreateAsyncInt<MedicTbl>(medic);
-                    await _repository.UpdateAsync(userdb);
+            
+                medicdb.License = medic.License;
+                medicdb.Specialization = medic.Specialization;
+                medicdb.Country = medic.Country;
+                medicdb.Degree = medic.Degree;
+                medicdb.PatientsAvg = medic.PatientsAvg;
+                medicdb.PhoneNumber = medic.PhoneNumber;
+                medicdb.WebSite = medic.WebSite;
+                medicdb.MedicTypeType = medic.MedicTypeType;
+                medicdb.Status = 1;
+                
+                await _repository.UpdateAsync(medicdb);
                 respuesta.Ok = 1;
-                respuesta.Message = "Usuario Modificado";
+                respuesta.Message = "medico Modificado";
             }
             catch (Exception e)
             {
@@ -191,20 +159,19 @@ namespace SecuenceBack.Controllers
             var userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
             try
             {
-                var deleteUser = await _repository.SelectById<UserTbl>(id);
-                if (deleteUser != null && deleteUser.DeletedAt == null)
+                var deleteUser = await _repository.SelectById<MedicTbl>(id);
+                if (deleteUser != null && deleteUser.DeleteedAt == null)
                 {
-                    deleteUser.DeletedAt = DateTime.Now;
+                    deleteUser.DeleteedAt = DateTime.Now;
                     deleteUser.Status = 0;
                     await _repository.UpdateAsync(deleteUser);
                     respuesta.Ok = 1;
-                    //respuesta.Message = "Success";
-                    respuesta.Message = "Usuario Eliminado";
+                    respuesta.Message = "medico Eliminado";
                 }
                 else
                 {
                     respuesta.Ok = 0;
-                    respuesta.Message = "Usuario no encontrado";
+                    respuesta.Message = "medico no encontrado";
                 }
             }
             catch (Exception e)
